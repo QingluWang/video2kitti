@@ -43,7 +43,5 @@ target_wrapper.*
 CMakeLists.txt.user*
 
 #images videos
-*.jpg
-*.png
-*.jpeg
-*.mp4
+/dataset/*
+/videos/*
