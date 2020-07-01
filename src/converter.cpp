@@ -50,7 +50,6 @@ bool Converter::Video2Imgs(const string& _src_path,const string& _dst_path \
         QMessageBox::warning(NULL, "warning", QString::fromUtf8("视频文件不存在！"), QMessageBox::Yes);
         return false;
     }
-    const string optFlow = "farneback";  //使用的算法：farneback, tvl1, brox, pyrlk
     const bool gpu = false;
     Ptr<cv::superres::SuperResolution> super_res;
     if ( gpu )
@@ -59,7 +58,7 @@ bool Converter::Video2Imgs(const string& _src_path,const string& _dst_path \
         super_res = cv::superres::createSuperResolution_BTVL1();
 
     Ptr<cv::superres::FrameSource> frame_source;
-    //设置要使用的超分辨算法
+
     if( gpu )
     {
         //如果要使用gpu的话，要将视频进行gpu编码
