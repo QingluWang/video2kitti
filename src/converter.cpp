@@ -123,13 +123,14 @@ bool Converter::Video2Imgs(const string& _src_path,const string& _dst_path \
             break;
         /*超分辨率重建图像--end*/
         /*图像裁剪及时间序列生成--begin*/
-        Mat frame_resized;
         stringstream str_srm;
         str_srm << setw(6) << setfill('0') << img_sq++ << _img_type;
-        cv::resize(result, frame_resized, cv::Size(_img_width,_img_height));
+        //cv::resize(result, frame_resized, cv::Size(_img_width,_img_height));
         // 裁剪图像
-        Rect area(0,frame_resized.rows/8.0,frame_resized.cols/9.0*8,frame_resized.rows/14.0*11);
-        Mat corp_frame_resized = frame_resized(area);
+        Rect area(0,result.rows/8.0,result.cols/9.0*8,result.rows/14.0*11);
+        Mat corp_frame = result(area);
+        Mat corp_frame_resized;
+        cv::resize(corp_frame, corp_frame_resized, cv::Size(_img_width,_img_height));
         imwrite(target_path_2 + str_srm.str(),corp_frame_resized);
         if(txt_srm.is_open()){
             auto now = chrono::system_clock::now();
